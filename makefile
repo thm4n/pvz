@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++20  
+CXXFLAGS := -Wall -Wextra -std=c++23  
 CXXINCS := -Isource $(shell sdl2-config --cflags)
 CXXLIBS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 CXXDBG := -g3 -fsanitize=address -static-libasan
@@ -23,7 +23,10 @@ TARGET := pvz
 .PHONY: $(TARGET)
 
 # Default target
-all: $(TARGET)
+all: $(OBJ_DIR) $(TARGET)
+
+$(OBJ_DIR):
+	mkdir -p $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "compiling $@"
