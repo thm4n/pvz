@@ -67,3 +67,11 @@ void Game::setupResourceManager() {
 
 	this->_resourceManager = new ResourceManager(this->_graphics);
 }
+
+// loads all relevant resources for current stage
+void Game::loadResources() {
+	std::string resPath = "resources/Day-Field.png";
+	debug("loading resource: %s", resPath.c_str());
+
+	this->_resourceManager->loadResource(resPath);
+}

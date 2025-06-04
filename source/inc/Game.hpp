@@ -38,4 +38,6 @@ public:
 	bool isGameOver();
 	void setGraphics(Graphics* graphics);
 	void setupResourceManager();
+
+	void loadResources();
 };

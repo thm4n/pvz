@@ -20,6 +20,8 @@ int main() {
 	graphics->initSDL();
 	graphics->initGraphics();
 
+	game->loadResources();
+
 	while (!game->isGameOver()) {
 		graphics->frameStart();
 
