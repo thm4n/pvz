@@ -6,10 +6,10 @@
 
 class Zombie : public Entity {
 public:
-    Zombie(int r, int c);
-    ~Zombie();
+	Zombie(int r, int c);
+	~Zombie();
 
-    void update() override;
+	void update() override;
 
-    char getSymbol() override;
+	char getSymbol() override;
 };

@@ -6,12 +6,12 @@
 
 class Plant : public Entity {
 public:
-    int shootCooldown;
+	int shootCooldown;
 
-    Plant(int r, int c);
-    ~Plant();
+	Plant(int r, int c);
+	~Plant();
 
-    void update() override;
+	void update() override;
 
-    char getSymbol() override;
+	char getSymbol() override;
 };

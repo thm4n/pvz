@@ -9,9 +9,9 @@ Zombie::~Zombie() {
 }
 
 void Zombie::update() {
-    col -= 1; // Move left each tick
+	col -= 1; // Move left each tick
 }
 
 char Zombie::getSymbol() {
-    return 'Z';
+	return 'Z';
 }

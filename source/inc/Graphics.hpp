@@ -5,33 +5,38 @@
 #include <SDL_mixer.h>
 
 #include "Logger.hpp"
+#include "ResourceManager.hpp"
+#include "Texture.hpp"
 
 class Graphics {
 public:
-    Graphics();
-    ~Graphics();
+	Graphics();
+	~Graphics();
 
-    void initSDL();
-    void initGraphics();
+	void initSDL();
+	void initGraphics();
 
-    void frameStart();
-    void frameEnd();
+	void frameStart();
+	void frameEnd();
 
-    void setTargetFPS(int targetFPS);
-    int getTargetFPS() const;
-    int getFrameDuration() const;
+	void setTargetFPS(int targetFPS);
+	int getTargetFPS() const;
+	int getFrameDuration() const;
 
 private:
-    int _targetFPS;
-    double _frameDuration;
+	friend class ResourceManager;
+	friend class Texture;
 
-    SDL_Window* _window;
-    SDL_Renderer* _renderer;
+	int _targetFPS;
+	double _frameDuration;
 
-    // tick counters
-    struct tickCounters {
-        Uint64 now;
-        Uint64 last;
-        double deltaTime;
-    } _tickCounters;
+	SDL_Window* _window;
+	SDL_Renderer* _renderer;
+
+	// tick counters
+	struct tickCounters {
+		Uint64 now;
+		Uint64 last;
+		double deltaTime;
+	} _tickCounters;
 };
