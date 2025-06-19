@@ -1,7 +1,7 @@
 this is a text file
-there are letters here
+there are letters here and this wasnt here earlier
 please note that letters are here :)
 
-
+this line was added
 
 hi :*
