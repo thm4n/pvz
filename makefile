@@ -6,6 +6,8 @@ CXXLIBS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 CXXDBG := -g3 -fsanitize=address -static-libasan
 CXXARGS := $(CXXFLAGS) $(CXXINCS) $(CXXDBG)
 
+DEPENDENCIES := 
+
 
 SRC_DIR := source/src
 OBJ_DIR := bin
@@ -19,8 +21,10 @@ OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
 # Output binary name
 TARGET := pvz
+# List of tests
+TESTS := TestAnimationReader
 
-.PHONY: $(TARGET)
+.PHONY: $(TARGET) $(TESTS)
 
 # Default target
 all: $(OBJ_DIR) $(TARGET)
@@ -41,3 +45,6 @@ $(TARGET): $(OBJ)
 clean:
 	rm -rf ./bin/*
 	rm -f $(TARGET)
+
+TestAnimationReader: bin/AnimationReader.o
+	$(CXX) $(CXXARGS) ./source/tests/TestAnimationReader.cpp $^ -o $@
