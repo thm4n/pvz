@@ -30,6 +30,7 @@ int main() {
             game->handleEvent(e);
         }
 
+        graphics->clearScreen();
         game->update();
         game->draw();
 

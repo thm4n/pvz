@@ -33,7 +33,9 @@ void Game::update() {
 }
 
 void Game::draw() {
-
+    
+    // must be called at end
+    this->_graphics->draw();
 }
 
 bool Game::isGameOver() {
