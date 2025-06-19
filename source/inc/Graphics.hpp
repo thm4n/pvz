@@ -16,6 +16,8 @@ public:
 
     void frameStart();
     void frameEnd();
+    void clearScreen();
+    void draw();
 
     void setTargetFPS(int targetFPS);
     int getTargetFPS() const;

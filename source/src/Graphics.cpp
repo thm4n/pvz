@@ -106,6 +106,15 @@ void Graphics::frameEnd() {
     }
 }
 
+void Graphics::clearScreen() {
+    SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255); // Set color to black
+    SDL_RenderClear(this->_renderer);
+}
+
+void Graphics::draw() {
+    SDL_RenderPresent(this->_renderer); // Present the renderer
+}
+
 void Graphics::setTargetFPS(int targetFPS) {
     this->_targetFPS = targetFPS;
     this->_frameDuration = 1000.0 / (double)targetFPS;
