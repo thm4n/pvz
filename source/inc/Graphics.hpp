@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
+#include "ResourceManager.hpp"
 #include "Logger.hpp"
 
 class Graphics {
@@ -22,6 +23,7 @@ public:
     void setTargetFPS(int targetFPS);
     int getTargetFPS() const;
     int getFrameDuration() const;
+    ResourceManager* createResourceManager() const;
 
 private:
     int _targetFPS;

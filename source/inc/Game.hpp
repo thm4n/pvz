@@ -12,6 +12,7 @@
 #include "Zombie.hpp"
 
 #include "Graphics.hpp"
+#include "ResourceManager.hpp"
 
 #define ROWS 5
 #define COLS 10
@@ -22,6 +23,7 @@ private:
     std::vector<Zombie> _zombies;
     bool _exit;
     Graphics* _graphics;
+    ResourceManager* _resourceManager;
 
 public:
     Game();
