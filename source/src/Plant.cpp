@@ -9,10 +9,10 @@ Plant::~Plant() {
 }
 
 void Plant::update() {
-    if(shootCooldown > 0)
-        shootCooldown--;
+	if(shootCooldown > 0)
+		shootCooldown--;
 }
 
 char Plant::getSymbol() {
-    return 'P';
+	return 'P';
 }

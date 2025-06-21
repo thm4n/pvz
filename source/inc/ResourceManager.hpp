@@ -15,18 +15,18 @@ namespace fs = std::filesystem;
 
 class ResourceManager {
 public:
-    ResourceManager(SDL_Renderer* renderer);
+	ResourceManager(SDL_Renderer* renderer);
 
-    ~ResourceManager();
+	~ResourceManager();
 
-    // Load a resource from file
-    static void loadResource(const std::string& resourcePath);
+	// Load a resource from file
+	static void loadResource(const std::string& resourcePath);
 
-    static Texture* getResource(const std::string& resourcePath);
+	static Texture* getResource(const std::string& resourcePath);
 
 private:
-    static SDL_Renderer* _renderer; // Ref to the Pointer to the Graphics' SDL renderer
-    static std::map<const std::string, Texture*> _textures; // Map of loaded textures
-    
-    void freeAll();
+	static SDL_Renderer* _renderer; // Ref to the Pointer to the Graphics' SDL renderer
+	static std::map<const std::string, Texture*> _textures; // Map of loaded textures
+	
+	void freeAll();
 };

@@ -15,12 +15,12 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 std::vector<std::string> gResourcePaths = {
-    "resources/Diamond.png",
-    "resources/Diamond_shine1.png",
-    "resources/Diamond_shine2.png",
-    "resources/Diamond_shine3.png",
-    "resources/Diamond_shine4.png",
-    "resources/Diamond_shine5.png"
+	"resources/Diamond.png",
+	"resources/Diamond_shine1.png",
+	"resources/Diamond_shine2.png",
+	"resources/Diamond_shine3.png",
+	"resources/Diamond_shine4.png",
+	"resources/Diamond_shine5.png"
 };
 int gframes = gResourcePaths.size();
 
@@ -82,61 +82,61 @@ void close() {
 }
 
 int main() {
-    if(!init()) {
-        error("Failed to initialize!");
-        return 1;
-    }
+	if(!init()) {
+		error("Failed to initialize!");
+		return 1;
+	}
 
-    ResourceManager* resourceManager = new ResourceManager(gRenderer);
-    Texture* currTexture = nullptr;
+	ResourceManager* resourceManager = new ResourceManager(gRenderer);
+	Texture* currTexture = nullptr;
 
-    for(const auto& resourcePath : gResourcePaths) {
-        ResourceManager::loadResource(resourcePath);
-    }
+	for(const auto& resourcePath : gResourcePaths) {
+		ResourceManager::loadResource(resourcePath);
+	}
 
-    bool quit = false;
+	bool quit = false;
 
-    //Event handler
-    SDL_Event e;
+	//Event handler
+	SDL_Event e;
 
-    //Current animation frame
-    int frame = 0;
+	//Current animation frame
+	int frame = 0;
 
-    //While application is running
-    while( !quit )
-    {
-        //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 )
-        {
-            //User requests quit
-            if( e.type == SDL_QUIT )
-            {
-                quit = true;
-            }
-        }
+	//While application is running
+	while( !quit )
+	{
+		//Handle events on queue
+		while( SDL_PollEvent( &e ) != 0 )
+		{
+			//User requests quit
+			if( e.type == SDL_QUIT )
+			{
+				quit = true;
+			}
+		}
 
-        //Clear screen
-        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-        SDL_RenderClear( gRenderer );
+		//Clear screen
+		SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+		SDL_RenderClear( gRenderer );
 
-        //Render current frame
-        if(gframes) {
-            currTexture = ResourceManager::getResource(gResourcePaths[frame % gframes]);
-            currTexture->render( gRenderer, (SCREEN_WIDTH - currTexture->getWidth()) / 2, (SCREEN_HEIGHT - currTexture->getHeight()) / 2);
-        }
-        //Update screen
-        SDL_RenderPresent( gRenderer );
+		//Render current frame
+		if(gframes) {
+			currTexture = ResourceManager::getResource(gResourcePaths[frame % gframes]);
+			currTexture->render( gRenderer, (SCREEN_WIDTH - currTexture->getWidth()) / 2, (SCREEN_HEIGHT - currTexture->getHeight()) / 2);
+		}
+		//Update screen
+		SDL_RenderPresent( gRenderer );
 
-        //Go to next frame
-        ++frame;
-        if(frame == gframes)
-            frame = 0;
+		//Go to next frame
+		++frame;
+		if(frame == gframes)
+			frame = 0;
 
-        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
-    }
+		SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+	}
 
-    delete(resourceManager);
-    close();
+	delete(resourceManager);
+	close();
 
-    return 0;
+	return 0;
 }

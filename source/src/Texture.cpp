@@ -12,8 +12,8 @@ Texture::~Texture() {
 
 void Texture::loadFromFile(SDL_Renderer* renderer, std::string path) {
 	if(this->_texture != nullptr) {
-        this->free();
-    }
+		this->free();
+	}
 
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if(!loadedSurface) {
@@ -23,7 +23,7 @@ void Texture::loadFromFile(SDL_Renderer* renderer, std::string path) {
 	else {
 		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 
-        this->_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+		this->_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
 		if(!this->_texture) {
 			error("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 			// throw std::runtime_error("Unable to create texture");

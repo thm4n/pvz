@@ -19,22 +19,22 @@
 
 class Game {
 private:
-    std::vector<Plant> _plants;
-    std::vector<Zombie> _zombies;
-    bool _exit;
-    Graphics* _graphics;
-    ResourceManager* _resourceManager;
+	std::vector<Plant> _plants;
+	std::vector<Zombie> _zombies;
+	bool _exit;
+	Graphics* _graphics;
+	ResourceManager* _resourceManager;
 
 public:
-    Game();
-    ~Game();
-    
-    void handleEvent(SDL_Event& e);
+	Game();
+	~Game();
+	
+	void handleEvent(SDL_Event& e);
 
-    void update();
-    void draw();
-    void exit();
+	void update();
+	void draw();
+	void exit();
 
-    bool isGameOver();
-    void setGraphics(Graphics* graphics);
+	bool isGameOver();
+	void setGraphics(Graphics* graphics);
 };
