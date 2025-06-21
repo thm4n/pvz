@@ -1,43 +1,48 @@
 # Compiler and flags
 CXX := g++
 CXXFLAGS := -Wall -Wextra -std=c++23  
-CXXINCS := -Isource $(shell sdl2-config --cflags)
-CXXLIBS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+CXXINCS := -Isource $(shell sdl2-config --cflags) -I/usr/local/include
+CXXLIBS := -L/usr/local/lib -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -ltinyxml2
 CXXDBG := -g3 -fsanitize=address -static-libasan
 CXXARGS := $(CXXFLAGS) $(CXXINCS) $(CXXDBG)
+
+DEPENDENCIES := 
 
 
 SRC_DIR := source/src
 OBJ_DIR := bin
 
 # Find all .cpp files in the 'source' directory
-SRC := $(shell find source -name '*.cpp')
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-_OBJ := $(SRC:.cpp=.o)
 OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
 
 # Output binary name
 TARGET := pvz
+# List of tests
+TESTS := TestAnimationReader
 
-.PHONY: $(TARGET)
+.PHONY: $(TARGET) $(TESTS)
 
 # Default target
-all: $(OBJ_DIR) $(TARGET)
+all: $(OBJ_DIR) $(TARGET) $(TESTS)
 
 $(OBJ_DIR):
 	mkdir -p $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "compiling $@"
-	$(CXX) $(CXXARGS) -c $^ -o $@
+	$(CXX) -c $^ -o $@ $(CXXARGS)
 
 # Link all source files into the target
 $(TARGET): $(OBJ)
 	@echo "compiling $(TARGET)"
-	$(CXX) $(CXXARGS) $(CXXLIBS) -o $@ $^
+	$(CXX) ./source/entrypoints/main.cpp -o $@ $^ $(CXXARGS) $(CXXLIBS) 
 
 # Clean build artifacts
 clean:
 	rm -rf ./bin/*
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(TESTS)
+
+TestAnimationReader: $(OBJ)
+	$(CXX) ./source/entrypoints/TestAnimationReader.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
