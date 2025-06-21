@@ -20,7 +20,7 @@ OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 # Output binary name
 TARGET := pvz
 # List of tests
-TESTS := TestAnimationReader
+TESTS := TestAnimationReader TestResourceManager
 
 .PHONY: $(TARGET) $(TESTS)
 
@@ -46,3 +46,7 @@ clean:
 
 TestAnimationReader: $(OBJ)
 	$(CXX) ./source/entrypoints/TestAnimationReader.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+
+TestResourceManager: $(OBJ)
+	$(CXX) ./source/entrypoints/TestResourceManager.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+	

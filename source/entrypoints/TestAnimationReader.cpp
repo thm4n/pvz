@@ -5,7 +5,7 @@ int main() {
     std::string animationFilePath = "resources/fire.reanim"; // Replace with actual file path
     Animation* animation = AnimationReader::readAnimation(animationFilePath);
     
-    if (animation) {
+    if(animation) {
         std::cout << "Animation loaded successfully!" << std::endl;
     } else {
         std::cout << "Failed to load animation." << std::endl;
