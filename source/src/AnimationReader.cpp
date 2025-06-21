@@ -13,7 +13,7 @@ namespace AnimationReader {
 
         fs::path animationPath(filePath);
 
-        if (!fs::exists(animationPath)) {
+        if(!fs::exists(animationPath)) {
             error("Animation file does not exist: %s", filePath.c_str());
             return nullptr;
         }
@@ -21,7 +21,7 @@ namespace AnimationReader {
         debug("Loading animation: %s", animationName.c_str());
 
         doc.LoadFile(filePath.c_str());
-        if (doc.ErrorID() != xml::XML_SUCCESS) {
+        if(doc.ErrorID() != xml::XML_SUCCESS) {
             error("Failed to load animation file: %s, Error: %s", filePath.c_str(), doc.ErrorName());
             return nullptr;
         }
@@ -29,7 +29,7 @@ namespace AnimationReader {
         debug("Animation file loaded successfully: %s", filePath.c_str());
 
         element = doc.FirstChildElement("fps");
-        if (!element) {
+        if(!element) {
             error("No <fps> element found in animation file: %s", filePath.c_str());
             return nullptr;
         }
@@ -94,7 +94,7 @@ namespace AnimationReader {
         xml::XMLElement* currElement = nullptr;
 
         currElement = frameElement->FirstChildElement();
-        if (!currElement) {
+        if(!currElement) {
             error("No child elements found in frame element - frame is empty");
             return true; // Return an empty frame
         }
@@ -102,7 +102,7 @@ namespace AnimationReader {
         while(currElement) {
             debug("Parsing frame element: %s", currElement->Name());
 
-            if (currElement->Name() == std::string("f")) {
+            if(currElement->Name() == std::string("f")) {
                 debug("Found <f> element: %s", currElement->Name());
                 if(currElement->IntText() == -1) {
                     debug("<f> element indicates frame is hidden");

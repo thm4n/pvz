@@ -9,7 +9,7 @@ Plant::~Plant() {
 }
 
 void Plant::update() {
-    if (shootCooldown > 0)
+    if(shootCooldown > 0)
         shootCooldown--;
 }
 

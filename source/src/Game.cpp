@@ -5,7 +5,9 @@ Game::Game() {
 }
 
 Game::~Game() {
-    
+    debug("Destroying Game class");
+    delete(this->_resourceManager);
+    debug("Game class destroyed");
 }
 
 void Game::handleEvent(SDL_Event& e) {
@@ -39,11 +41,11 @@ void Game::draw() {
 }
 
 bool Game::isGameOver() {
-    if (this->_exit)
+    if(this->_exit)
         return true;
 
     for (auto& z : this->_zombies)
-        if (z.col <= 0) return true;
+        if(z.col <= 0) return true;
     return false;
 }
 
@@ -52,5 +54,16 @@ void Game::exit() {
 }
 
 void Game::setGraphics(Graphics* graphics) {
+    debug("Setting Graphics");
     this->_graphics = graphics;
+
+    debug("Creating ResourceManager");
+    this->_resourceManager = graphics->createResourceManager();
+    if(!this->_resourceManager) {
+        error("Failed to create ResourceManager");
+        // throw std::runtime_error("Failed to create ResourceManager");
+    }
+    else {
+        debug("ResourceManager created successfully");
+    }
 }

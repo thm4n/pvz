@@ -101,7 +101,7 @@ void Graphics::frameEnd() {
     double frameTime = (double)((SDL_GetPerformanceCounter() - this->_tickCounters.now) * 1000.f) / SDL_GetPerformanceFrequency();
     double delayTime = this->_frameDuration - frameTime;
 
-    if (delayTime > 0) {
+    if(delayTime > 0) {
         SDL_Delay((Uint32)delayTime);
     }
 }
@@ -126,4 +126,12 @@ int Graphics::getTargetFPS() const {
 
 int Graphics::getFrameDuration() const {
     return this->_frameDuration;
+}
+
+ResourceManager* Graphics::createResourceManager() const {
+    if(!this->_renderer) {
+        error("Renderer is not initialized, cannot create ResourceManager");
+        return nullptr;
+    }
+    return new ResourceManager(this->_renderer);
 }
