@@ -1,40 +1,38 @@
 #pragma once
-#include <vector>
-#include <iostream>
-#include <cstdlib>
-
 #include <SDL2/SDL.h>
 
-#include "Logger.hpp"
+#include <cstdlib>
+#include <iostream>
+#include <vector>
 
 #include "Entity.hpp"
-#include "Plant.hpp"
-#include "Zombie.hpp"
-
 #include "Graphics.hpp"
+#include "Logger.hpp"
+#include "Plant.hpp"
 #include "ResourceManager.hpp"
+#include "Zombie.hpp"
 
 #define ROWS 5
 #define COLS 10
 
 class Game {
 private:
-	std::vector<Plant> _plants;
-	std::vector<Zombie> _zombies;
-	bool _exit;
-	Graphics* _graphics;
-	ResourceManager* _resourceManager;
+    std::vector<Plant> _plants;
+    std::vector<Zombie> _zombies;
+    bool _exit;
+    Graphics* _graphics;
+    ResourceManager* _resourceManager;
 
 public:
-	Game();
-	~Game();
-	
-	void handleEvent(SDL_Event& e);
+    Game();
+    ~Game();
 
-	void update();
-	void draw();
-	void exit();
+    void handleEvent(SDL_Event& e);
 
-	bool isGameOver();
-	void setGraphics(Graphics* graphics);
+    void update();
+    void draw();
+    void exit();
+
+    bool isGameOver();
+    void setGraphics(Graphics* graphics);
 };

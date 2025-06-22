@@ -1,17 +1,11 @@
 #include "inc/Zombie.hpp"
 
-Zombie::Zombie(int r, int c) : Entity(r, c, 10) {
+Zombie::Zombie(int r, int c) : Entity(r, c, 10) {}
 
-}
-
-Zombie::~Zombie() {
-
-}
+Zombie::~Zombie() {}
 
 void Zombie::update() {
-	col -= 1; // Move left each tick
+    col -= 1;  // Move left each tick
 }
 
-char Zombie::getSymbol() {
-	return 'Z';
-}
+char Zombie::getSymbol() { return 'Z'; }
