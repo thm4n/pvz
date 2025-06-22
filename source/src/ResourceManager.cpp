@@ -43,11 +43,11 @@ Texture* ResourceManager::getResource(const std::string& resourcePath) {
 
 void ResourceManager::freeAll() {
     debug("freeing all resources:");
-    if (auto& pair : ResourceManager::_textures) {
-        debug(" >> freeing resource: %s", pair.first.c_str());
-        if (pair.second) {
-            pair.second->free();
-            delete pair.second;
+    for (auto it = ResourceManager::_textures.begin(); it != ResourceManager::_textures.end(); ++it) {
+        debug(" >> freeing resource: %s", it->first.c_str());
+        if (it->second) {
+            it->second->free();
+            delete it->second;
         }
     }
     debug("all resources freed");

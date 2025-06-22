@@ -11,19 +11,25 @@ Game::~Game() {
 void Game::handleEvent(SDL_Event& e) {
     switch (e.type) {
         case SDL_KEYDOWN:
+			info("Key pressed");
             if (e.key.keysym.sym == SDLK_ESCAPE) {
                 this->exit();
             }
             break;
         case SDL_KEYUP:
+			info("Key released");
             break;
         case SDL_MOUSEMOTION:
+			info("Mouse moved");
             break;
         case SDL_MOUSEBUTTONDOWN:
+			info("Mouse button pressed");
             break;
         case SDL_MOUSEBUTTONUP:
+			info("Mouse button released");
             break;
         case SDL_MOUSEWHEEL:
+			info("Mouse wheel scrolled");
             break;
     }
 }
@@ -36,7 +42,11 @@ void Game::draw() {
 }
 
 bool Game::isGameOver() {
-    if (this->_exit) return true;
+    if (this->_exit) {
+		info("Game Over");
+		return true;
+	}
+	return false;
 }
 
 void Game::exit() { this->_exit = true; }

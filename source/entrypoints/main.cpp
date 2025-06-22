@@ -19,12 +19,13 @@ int main() {
 	graphics->initGraphics();
 	game->setGraphics(graphics);
 
-	if(!game->isGameOver()) {
+	while(!game->isGameOver()) {
 		graphics->frameStart();
 
 		if(SDL_PollEvent(&e) != 0) {
 			// User requests quit
 			if(e.type == SDL_QUIT) {
+				info("User requested quit");
 				game->exit();
 			}
 			game->handleEvent(e);
@@ -37,7 +38,9 @@ int main() {
 		SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 		graphics->frameEnd();
 	}
+	info("Game loop ended");
 
+	debug("cleaning up");
 	delete graphics;
 	delete game;
 

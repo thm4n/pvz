@@ -66,6 +66,8 @@ void Graphics::initSDL() {
     } else {
         debug("SDL Mixer module initialized succesfully");
     }
+
+	info("SDL version: %d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL);
 }
 
 void Graphics::initGraphics() {
