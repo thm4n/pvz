@@ -37,7 +37,7 @@ Animation* readAnimation(const std::string& filePath) {  // entry point
     fps = std::stoi(element->GetText());
     debug("FPS: %d", fps);
 
-    if ((element = element->NextSiblingElement("track"))) {
+    while((element = element->NextSiblingElement("track"))) {
         debug("Found track element: %s", element->Name());
         track = {std::string(""), std::vector<AnimationFrame>({}), 0};
         parseTrack(element, track);
