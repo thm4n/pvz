@@ -19,11 +19,12 @@ int main() {
 	graphics->initGraphics();
 	game->setGraphics(graphics);
 
+	game->finishInitialization();
+
 	while(!game->isGameOver()) {
 		graphics->frameStart();
 
 		if(SDL_PollEvent(&e) != 0) {
-			// User requests quit
 			if(e.type == SDL_QUIT) {
 				info("User requested quit");
 				game->exit();

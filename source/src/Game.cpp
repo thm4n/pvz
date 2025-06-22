@@ -1,6 +1,11 @@
 #include "inc/Game.hpp"
 
-Game::Game() { this->_exit = false; }
+Game::Game() {
+	debug("Creating Game class");
+	this->_exit = false;
+	this->_stateManager = new StateManager();
+	debug("Game class created");
+}
 
 Game::~Game() {
     debug("Destroying Game class");
@@ -49,7 +54,10 @@ bool Game::isGameOver() {
 	return false;
 }
 
-void Game::exit() { this->_exit = true; }
+void Game::exit() { 
+	this->_stateManager->setState(StateManager::GameState::Exit);
+	this->_exit = true;
+}
 
 void Game::setGraphics(Graphics* graphics) {
     debug("Setting Graphics");
