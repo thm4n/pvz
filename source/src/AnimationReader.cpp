@@ -76,10 +76,7 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
     }
 
     while (element) {
-        emptyFrame = parseTrackFrame(element, currentFrame);
-        if (emptyFrame) {
-            debug("Empty frame found, duplicating last frame");
-        }
+        parseTrackFrame(element, currentFrame);
         printFrame(currentFrame);
 
         currentFrame.frameIndex = track.frameCount;
@@ -92,15 +89,10 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
     debug("Finished parsing frames, total frames: %d", track.frameCount);
 }
 
-bool parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame) {
+void parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame) {
     xml::XMLElement* currElement = nullptr;
 
     currElement = frameElement->FirstChildElement();
-    if (!currElement) {
-        error("No child elements found in frame element - frame is empty");
-        return true;  // Return an empty frame
-    }
-
     while (currElement) {
         debug("Parsing frame element: %s", currElement->Name());
 
@@ -136,14 +128,13 @@ bool parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame) {
             debug("Parsed opacity: %f", frame.opacity);
         } else if (currElement->Name() == std::string("i")) {
             frame.image = std::string(currElement->GetText());
-            debug("Parsed frame index: %s", frame.image.c_str());
+            debug("Parsed image: %s", frame.image.c_str());
         } else {
             error("Unknown element in frame: %s", currElement->Name());
         }
 
         currElement = currElement->NextSiblingElement();
     }
-    return false;
 }
 
 void printFrame(const AnimationFrame& frame) {
