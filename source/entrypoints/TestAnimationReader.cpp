@@ -1,8 +1,13 @@
 #include "inc/Animation.hpp"
 
-int main() {
+int main(int argc, char* argv[]) {
+	if(argc < 2) {
+		std::cerr << "Usage: " << argv[0] << " <animation_file_path>" << std::endl;
+		return 1;
+	}
+	
     // Example usage of the AnimationReader
-    std::string animationFilePath = "resources/fire.reanim"; // Replace with actual file path
+    std::string animationFilePath(argv[1]); // Replace with actual file path
     Animation* animation = AnimationReader::readAnimation(animationFilePath);
     
     if(animation) {
