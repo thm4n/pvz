@@ -53,3 +53,10 @@ void ResourceManager::freeAll() {
     debug("all resources freed");
     ResourceManager::_textures.clear();
 }
+
+fs::path ResourceManager::getResourcePathFromName(const std::string& resourceName) {
+	fs::path path = "resources/";
+	if(resourceName.contains("IMAGE_REANIM_")) {
+		
+	}
+}

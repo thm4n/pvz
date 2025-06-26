@@ -6,7 +6,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 
+#include "ResourceManager.hpp"
 #include "Animation.hpp"
 #include "Logger.hpp"
 
@@ -34,7 +36,7 @@ typedef struct {
 
 Animation* readAnimation(const std::string& filePath);
 void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track);
-bool parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame);
+void parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame);
 void printFrame(const AnimationFrame& frame);
 }  // namespace AnimationReader
 
@@ -46,6 +48,7 @@ public:
 
     void loadTracks(const std::vector<AnimationReader::AnimationTrack>& tracks);
     std::vector<std::string> getRequiredResources() const;
+    void loadRequiredResources() const;
 
 private:
     int _fps;

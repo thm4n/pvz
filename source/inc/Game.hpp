@@ -12,6 +12,7 @@
 #include "Zombie.hpp"
 
 #include "ResourceManager.hpp"
+#include "Animation.hpp"
 #include "StateManager.hpp"
 
 #define ROWS 5
@@ -39,8 +40,9 @@ public:
     bool isGameOver();
     void setGraphics(Graphics* graphics);
 
-	void finishInitialization() {
-		debug("Finished Game initialization");
-		this->_stateManager->setState(StateManager::GameState::MainMenu);
-	}
+	void gameLoopMainMenu();
+	void gameLoopInGame();
+	void finishInitialization();
+
+	Animation* loadAnimation(const fs::path& reanimFilePath);
 };

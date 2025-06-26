@@ -5,6 +5,9 @@
 
 #include <iostream>
 #include <string>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 #include "Logger.hpp"
 
@@ -40,6 +43,7 @@ public:
 
 private:
     // The actual hardware texture
+	fs::path _path;
     SDL_Texture *_texture;
 
     // Image dimensions

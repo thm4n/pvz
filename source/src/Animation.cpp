@@ -35,8 +35,7 @@ void Animation::loadTracks(
         }
     }
 
-    this->_duration = (float)this->_frameCount /
-                      this->_fps;  // Update duration based on frame count
+    this->_duration = (float)this->_frameCount / this->_fps;
 }
 
 std::vector<std::string> Animation::getRequiredResources() const {
@@ -45,14 +44,23 @@ std::vector<std::string> Animation::getRequiredResources() const {
         // throw std::runtime_error("No tracks loaded.");
     }
 
-    std::vector<std::string> resources;
+	std::set<std::string> reqRes;
     for (const auto& track : this->_tracks) {
         for (const auto& frame : track.frames) {
             if (!frame.image.empty()) {
-                resources.push_back(frame.image);
+                reqRes.insert(frame.image);
             }
         }
     }
 
-    return resources;
+    return std::vector<std::string>(reqRes.begin(), reqRes.end());
+}
+
+void Animation::loadRequiredResources() const {
+	std::string resourcePath;
+
+	for (const auto& resourceName : this->getRequiredResources()) {
+		debug("Loading required resource: %s", resourceName.c_str());
+		ResourceManager::loadResource(resourceName);
+	}
 }

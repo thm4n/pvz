@@ -61,7 +61,6 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
     AnimationFrame currentFrame = {0,   0.0, 0.0, 1.0,  1.0,
                                    0.0, 0.0, 1.0, true, std::string("")};
     xml::XMLElement* element = nullptr;
-    bool emptyFrame = false;
 
     debug("Entering parseTrack function");
     element = trackElement->FirstChildElement("name");
