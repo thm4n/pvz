@@ -1,6 +1,7 @@
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++23  
+CXXWARNINGS := -Wno-switch
+CXXFLAGS := -Wall -Wextra -std=c++23 $(CXXWARNINGS)
 CXXINCS := -Isource $(shell sdl2-config --cflags) -I/usr/local/include
 CXXLIBS := -L/usr/local/lib -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -ltinyxml2
 CXXDBG := -g3 -fsanitize=address -static-libasan
@@ -33,11 +34,13 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "compiling $@"
 	$(CXX) -c $^ -o $@ $(CXXARGS)
+	@echo ""
 
 # Link all source files into the target
 $(TARGET): $(OBJ)
 	@echo "compiling $(TARGET)"
-	$(CXX) ./source/entrypoints/main.cpp -o $@ $^ $(CXXARGS) $(CXXLIBS) 
+	$(CXX) ./source/entrypoints/main.cpp -o $@ $^ $(CXXARGS) $(CXXLIBS)
+	@echo ""
 
 # Clean build artifacts
 clean:
@@ -45,8 +48,12 @@ clean:
 	rm -f $(TARGET) $(TESTS)
 
 TestAnimationReader: $(OBJ)
+	@echo "compiling $@"
 	$(CXX) ./source/entrypoints/TestAnimationReader.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+	@echo ""
 
 TestResourceManager: $(OBJ)
+	@echo "compiling $@"
 	$(CXX) ./source/entrypoints/TestResourceManager.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+	@echo ""
 	
