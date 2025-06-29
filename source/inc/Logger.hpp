@@ -4,6 +4,7 @@
 #include <cstring>
 #include <ctime>
 #include <iostream>
+#include <exception>
 
 #define error(format, ...)                            \
     (logger::_error(__FILE__, __FUNCTION__, __LINE__, \
