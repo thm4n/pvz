@@ -9,7 +9,6 @@ Game::Game() {
 
 Game::~Game() {
     debug("Destroying Game class");
-    delete (this->_resourceManager);
 
 	debug("Destroying StateManager");
 	delete (this->_stateManager);
@@ -18,6 +17,14 @@ Game::~Game() {
 	SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
     
 	debug("Game class destroyed");
+}
+
+void Game::destroyResourceManager() {
+	if(this->_resourceManager) {
+		debug("Destroying ResourceManager");
+		delete this->_resourceManager;
+		this->_resourceManager = nullptr;
+	}
 }
 
 void Game::handleEvent(SDL_Event& e) {
@@ -32,7 +39,6 @@ void Game::handleEvent(SDL_Event& e) {
 			info("Key released");
             break;
         case SDL_MOUSEMOTION:
-			info("Mouse moved");
             break;
         case SDL_MOUSEBUTTONDOWN:
 			info("Mouse button pressed");
@@ -88,7 +94,7 @@ void Game::setGraphics(Graphics* graphics) {
     this->_resourceManager = graphics->createResourceManager();
     if (!this->_resourceManager) {
         error("Failed to create ResourceManager");
-        // throw std::runtime_error("Failed to create ResourceManager");
+        throw std::runtime_error("Failed to create ResourceManager");
     } else {
         debug("ResourceManager created successfully");
     }
@@ -100,13 +106,13 @@ void Game::gameLoopMainMenu() {
 	debug("Enetring Main Menu Loop");
 	this->_stateManager->setState(GameState::MainMenu);
 
-	fs::path selector_screen_reanim_file_path = "resources/selector_screen.reanim";
+	fs::path selector_screen_reanim_file_path = "resources/reanims/SelectorScreen.reanim";
 	if (!fs::exists(selector_screen_reanim_file_path)) {
 		error("Selector screen reanim file does not exist: %s", selector_screen_reanim_file_path.string().c_str());
-		// throw std::runtime_error("Selector screen reanim file does not exist");
+		throw std::runtime_error("Selector screen reanim file does not exist");
 	}
 
-	this->loadAnimation(selector_screen_reanim_file_path);
+	Animation* selectorScreenAnimation = this->loadAnimation(selector_screen_reanim_file_path);
 
 	while(this->_stateManager->getState() == GameState::MainMenu) {
 		this->_graphics->frameStart();
@@ -126,6 +132,9 @@ void Game::gameLoopMainMenu() {
 		SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 		this->_graphics->frameEnd();
 	}
+
+	debug("Cleaning up animations");
+	delete selectorScreenAnimation;
 
 	debug("Exiting Main Menu Loop");
 }
@@ -158,6 +167,55 @@ void Game::gameLoopInGame() {
 	debug("Exiting In-Game Loop");
 }
 
+void Game::loadResources() {
+	this->_stateManager->setState(GameState::LoadingResources);
+	
+	std::string resourcesFilePath = "resources/resources.json";
+	if (!fs::exists(resourcesFilePath)) {
+		error("Resources file does not exist: %s", resourcesFilePath.c_str());
+		throw std::runtime_error("Resources file does not exist");
+	}
+
+	debug("loading resource file: %s", resourcesFilePath.c_str());
+	std::ifstream resourceFile(resourcesFilePath, std::ios::in);
+	if (!resourceFile.is_open()) {
+		error("Failed to open resources file: %s", resourcesFilePath.c_str());
+		throw std::runtime_error("Failed to open resources file");
+	}
+	ordered_json resources = json::parse(resourceFile);
+	resourceFile.close();
+
+	debug("Resources file loaded successfully");
+
+	for(uint i = 0; i < resources.size(); i++) {
+		debug("Processing resource group: %s", resources[i]["name"].template get<std::string>().c_str());
+		auto& resourceGroup = resources[i]["Images"];
+		// for(uint j = 0; j < resourceGroup.size(); j++) {
+		// 	this->_resourceManager->loadImageResource(
+		// 		resourceGroup[j]["id"].template get<std::string>(),
+		// 		resourceGroup[j]["path"].template get<std::string>()
+		// 	);
+		// }
+
+		resourceGroup = resources[i]["Font"];
+		for(uint j = 0; j < resourceGroup.size(); j++) {
+			this->_resourceManager->loadFontResource(
+				resourceGroup[j]["id"].template get<std::string>(),
+				resourceGroup[j]["path"].template get<std::string>(),
+				resourceGroup[j]["size"].template get<uint>()
+			);
+		}
+
+		resourceGroup = resources[i]["Sound"];
+		for(uint j = 0; j < resourceGroup.size(); j++) {
+			this->_resourceManager->loadAudioResource(
+				resourceGroup[j]["id"].template get<std::string>(),
+				resourceGroup[j]["path"].template get<std::string>()
+			);
+		}
+	}
+}
+
 void Game::finishInitialization() {
 	debug("Finished Game initialization");
 	this->_stateManager->setState(GameState::MainMenu);
@@ -167,8 +225,10 @@ void Game::finishInitialization() {
 Animation* Game::loadAnimation(const fs::path& reanimFilePath) {
 	debug("Loading animation from file: %s", reanimFilePath.string().c_str());
 	
-	// Animation* animation = AnimationReader::readAnimation(reanimFilePath.string());
-
-	// Load the animation using the ResourceManager
-	// animation->loadRequiredResources();
+	Animation* animation = AnimationReader::readAnimation(reanimFilePath.string());
+	if (!animation) {
+		error("Failed to load animation from file: %s", reanimFilePath.string().c_str());
+		throw std::runtime_error("Failed to load animation");
+	}
+	return animation;
 }
