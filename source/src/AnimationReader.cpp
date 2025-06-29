@@ -43,7 +43,7 @@ Animation* readAnimation(const std::string& filePath) {  // entry point
         parseTrack(element, track);
         if (track.frameCount == 0) {
             error("Track %s has no frames, skipping", track.name.c_str());
-            // throw std::runtime_error("Track has no frames");
+            throw std::runtime_error("Track has no frames");
         }
         tracks.push_back(track);
         debug("added to animation '%s' track '%s'", animationName.c_str(),
@@ -71,7 +71,7 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
     element = trackElement->FirstChildElement("t");
     if (!element) {
         error("No <t> elements found in track: %s", track.name.c_str());
-        // throw std::runtime_error("No frames found in track");
+        throw std::runtime_error("No frames found in track");
     }
 
     while (element) {
