@@ -36,7 +36,7 @@ void Graphics::initSDL() {
     status = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
     if (status < 0) {
         fatal("SDL Init error %s", SDL_GetError());
-        // throw exception here
+        throw std::runtime_error("SDL_Init failed");
     }
 
     int img_flags = IMG_INIT_PNG | IMG_INIT_JPG;
@@ -46,14 +46,14 @@ void Graphics::initSDL() {
     } else {
         error("SDL Image module failed to initialize properly: %s",
               IMG_GetError());
-        // throw exception here
+        throw std::runtime_error("SDL_Image_Init failed");
     }
 
     status = TTF_Init();
     if (status == -1) {
         error("SDL TTF module failed to initialize properly: %s",
               TTF_GetError());
-        // throw exception here
+        throw std::runtime_error("SDL_TTF_Init failed");
     } else {
         debug("SDL TTF module initialized succesfully");
     }
@@ -62,7 +62,7 @@ void Graphics::initSDL() {
     if (status < 0) {
         error("SDL Mixer module failed to initialize properly: %s",
               Mix_GetError());
-        // throw exception here
+        throw std::runtime_error("SDL_Mixer_Init failed");
     } else {
         debug("SDL Mixer module initialized succesfully");
     }
@@ -77,33 +77,32 @@ void Graphics::initGraphics() {
         SDL_WINDOW_FULLSCREEN_DESKTOP  // consider removing _DESKTOP (_DESKTOP
                                        // is for borderless)
     );
-    if (this->_window)
+    if (this->_window) {
         debug("SDL_Window initialized succesfully");
-    else
+    } else {
         error("SDL_CreateWinow failed: %s", SDL_GetError());
-
+		throw std::runtime_error("SDL_CreateWindow failed");
+	}
     this->_renderer =
         SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
-    if (this->_renderer)
+    if (this->_renderer) {
         debug("SDL_Renderer initialized succesfully");
-    else
+    } else {
         error("SDL_CreateRenderer failed: %s", SDL_GetError());
+		throw std::runtime_error("SDL_CreateRenderer failed");
+	}
 }
 
 void Graphics::frameStart() {
     this->_tickCounters.last = this->_tickCounters.now;
     this->_tickCounters.now = SDL_GetPerformanceCounter();
     this->_tickCounters.deltaTime =
-        (double)((this->_tickCounters.now - this->_tickCounters.last) *
-                 1000.f) /
-        SDL_GetPerformanceFrequency();
+        (double)((this->_tickCounters.now - this->_tickCounters.last) * 1000.f) / SDL_GetPerformanceFrequency();
 }
 
 void Graphics::frameEnd() {
     double frameTime =
-        (double)((SDL_GetPerformanceCounter() - this->_tickCounters.now) *
-                 1000.f) /
-        SDL_GetPerformanceFrequency();
+        (double)((SDL_GetPerformanceCounter() - this->_tickCounters.now) * 1000.f) / SDL_GetPerformanceFrequency();
     double delayTime = this->_frameDuration - frameTime;
 
     if (delayTime > 0) {
@@ -112,13 +111,12 @@ void Graphics::frameEnd() {
 }
 
 void Graphics::clearScreen() {
-    SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0,
-                           255);  // Set color to black
+    SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
     SDL_RenderClear(this->_renderer);
 }
 
 void Graphics::draw() {
-    SDL_RenderPresent(this->_renderer);  // Present the renderer
+    SDL_RenderPresent(this->_renderer);
 }
 
 void Graphics::setTargetFPS(int targetFPS) {
@@ -133,7 +131,7 @@ int Graphics::getFrameDuration() const { return this->_frameDuration; }
 ResourceManager* Graphics::createResourceManager() const {
     if (!this->_renderer) {
         error("Renderer is not initialized, cannot create ResourceManager");
-        return nullptr;
+        throw std::runtime_error("Renderer is not initialized");
     }
     return new ResourceManager(this->_renderer);
 }
