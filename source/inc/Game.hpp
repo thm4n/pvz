@@ -3,7 +3,16 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 #include <vector>
+#include <fstream>
+
+#include <filesystem>
+namespace fs = std::filesystem;
+
+#include <json.hpp>
+using json = nlohmann::json;
+using ordered_json = nlohmann::ordered_json;
 
 #include "Entity.hpp"
 #include "Graphics.hpp"
@@ -30,7 +39,8 @@ private:
 public:
     Game();
     ~Game();
-
+	void destroyResourceManager();
+	
     void handleEvent(SDL_Event& e);
 
     void update();
@@ -42,6 +52,8 @@ public:
 
 	void gameLoopMainMenu();
 	void gameLoopInGame();
+
+	void loadResources();
 	void finishInitialization();
 
 	Animation* loadAnimation(const fs::path& reanimFilePath);
