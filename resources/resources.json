@@ -54,88 +54,271 @@
         ],
         "Font": [
             {
-                "id": "FONT_BRIANNETOD16",
-                "path": "resources/fonts/BrianneTod16.txt"
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 12
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 14
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 16
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 18
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 20
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 22
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 24
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 26
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 28
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 30
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 32
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 34
+            },
+            {
+                "id": "FONT_BRIANNETOD",
+                "path": "resources/fonts/BrianneTod.ttf",
+                "size": 36
             }
         ]
     },
     {
         "name": "LoadingFonts",
-        "Images": [
-            {
-                "id": "FONT_IMAGE_HOUSEOFTERROR28",
-                "path": "resources/fonts/HouseofTerror28.png"
-            }
-        ],
+        "Images": [],
         "Sound": [],
         "Font": [
             {
-                "id": "FONT_HOUSEOFTERROR28",
-                "path": "resources/fonts/HouseofTerror28.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 12
             },
             {
-                "id": "FONT_HOUSEOFTERROR20",
-                "path": "resources/fonts/HouseofTerror20.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 14
             },
             {
-                "id": "FONT_HOUSEOFTERROR16",
-                "path": "resources/fonts/HouseofTerror16.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 16
             },
             {
-                "id": "FONT_TINYBOLD",
-                "path": "resources/fonts/Pix118Bold.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 18
             },
             {
-                "id": "FONT_CONTINUUMBOLD14",
-                "path": "resources/fonts/ContinuumBold14.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 20
             },
             {
-                "id": "FONT_CONTINUUMBOLD14OUTLINE",
-                "path": "resources/fonts/ContinuumBold14outback.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 22
             },
             {
-                "id": "FONT_DWARVENTODCRAFT12",
-                "path": "resources/fonts/DwarvenTodcraft12.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 24
             },
             {
-                "id": "FONT_DWARVENTODCRAFT15",
-                "path": "resources/fonts/DwarvenTodcraft15.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 26
             },
             {
-                "id": "FONT_DWARVENTODCRAFT18",
-                "path": "resources/fonts/DwarvenTodcraft18.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 28
             },
             {
-                "id": "FONT_DWARVENTODCRAFT18BRIGHTGREENINSET",
-                "path": "resources/fonts/DwarvenTodcraft18BrightGreenInset.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 30
             },
             {
-                "id": "FONT_DWARVENTODCRAFT18GREENINSET",
-                "path": "resources/fonts/DwarvenTodcraft18GreenInset.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 32
             },
             {
-                "id": "FONT_DWARVENTODCRAFT18YELLOW",
-                "path": "resources/fonts/DwarvenTodcraft18Yellow.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 34
             },
             {
-                "id": "FONT_DWARVENTODCRAFT24",
-                "path": "resources/fonts/DwarvenTodcraft24.txt"
+                "id": "FONT_HOUSEOFTERROR",
+                "path": "resources/fonts/HouseofTerror.ttf",
+                "size": 36
             },
             {
-                "id": "FONT_DWARVENTODCRAFT36BRIGHTGREENINSET",
-                "path": "resources/fonts/DwarvenTodcraft36BrightGreenInset.txt"
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 12
             },
             {
-                "id": "FONT_DWARVENTODCRAFT36GREENINSET",
-                "path": "resources/fonts/DwarvenTodcraft36GreenInset.txt"
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 14
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 16
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 18
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 20
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 22
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 24
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 26
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 28
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 30
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 32
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 34
+            },
+            {
+                "id": "FONT_CONTINUUM_BOLD",
+                "path": "resources/fonts/ContinuumBold.ttf",
+                "size": 36
             },
             {
                 "id": "FONT_PICO129",
-                "path": "resources/fonts/Pico129.txt"
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 12
             },
             {
-                "id": "FONT_BRIANNETOD12",
-                "path": "resources/fonts/BrianneTod12.txt"
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 14
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 16
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 18
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 20
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 22
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 24
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 26
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 28
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 30
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 32
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 34
+            },
+            {
+                "id": "FONT_PICO129",
+                "path": "resources/fonts/minecraft-regular.ttf",
+                "size": 36
             }
         ]
     },
@@ -2826,16 +3009,7 @@
             }
         ],
         "Sound": [],
-        "Font": [
-            {
-                "id": "FONT_BRIANNETOD32",
-                "path": "resources/fonts/BrianneTod32.txt"
-            },
-            {
-                "id": "FONT_BRIANNETOD32BLACK",
-                "path": "resources/fonts/BrianneTod32Black.txt"
-            }
-        ]
+        "Font": []
     },
     {
         "name": "DelayLoad_Zombatar",
