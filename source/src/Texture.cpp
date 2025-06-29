@@ -4,12 +4,13 @@ Texture::Texture() {
     this->_texture = nullptr;
     this->_width = 0;
     this->_height = 0;
+	this->_type = ResourceType::Uninitialized;
 }
 
 Texture::~Texture() { free(); }
 
-void Texture::loadFromFile(SDL_Renderer* renderer, std::string path) {
-    if (this->_texture != nullptr) {
+void Texture::loadImageFromFile(SDL_Renderer* renderer, std::string path) {
+    if (this->_texture) {
         this->free();
     }
 
@@ -17,24 +18,55 @@ void Texture::loadFromFile(SDL_Renderer* renderer, std::string path) {
     if (!loadedSurface) {
         error("Unable to load image %s! SDL_image Error: %s", path.c_str(),
               IMG_GetError());
-        // throw std::runtime_error("Unable to load image");
-    } else {
-        SDL_SetColorKey(loadedSurface, SDL_TRUE,
-                        SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-
-        this->_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-        if (!this->_texture) {
-            error("Unable to create texture from %s! SDL Error: %s\n",
-                  path.c_str(), SDL_GetError());
-            // throw std::runtime_error("Unable to create texture");
-        } else {
-            // Get image dimensions
-            this->_width = loadedSurface->w;
-            this->_height = loadedSurface->h;
-        }
-
-        SDL_FreeSurface(loadedSurface);
+        throw std::runtime_error("Unable to load image");
     }
+	SDL_SetColorKey(loadedSurface, SDL_TRUE,
+					SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
+
+	this->_texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+	if (!this->_texture) {
+		error("Unable to create texture from %s! SDL Error: %s\n",
+				path.c_str(), SDL_GetError());
+		throw std::runtime_error("Unable to create texture");
+	}
+	// Get image dimensions
+	this->_width = loadedSurface->w;
+	this->_height = loadedSurface->h;
+
+
+	SDL_FreeSurface(loadedSurface);
+	this->_content = path;
+	this->_type = ResourceType::IMAGE;
+}
+
+void Texture::loadTextFromFont(SDL_Renderer *renderer, std::string text, TTF_Font* ttf, SDL_Color color) {
+	if (this->_texture != nullptr) {
+		this->free();
+	}
+	
+	SDL_Surface* textSurface = TTF_RenderText_Solid(ttf, text.c_str(), color);
+	if (!textSurface) {
+		error("Unable to render text surface! SDL_ttf Error: %s", TTF_GetError());
+		throw std::runtime_error("Unable to render text surface");
+	}
+	this->_texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+	if (!this->_texture) {
+		error("Unable to create texture from rendered text! SDL Error: %s", SDL_GetError());
+		throw std::runtime_error("Unable to create texture from rendered text");
+	}
+
+	this->_width = textSurface->w;
+	this->_height = textSurface->h;
+
+	SDL_FreeSurface(textSurface);
+	this->_content = text;
+	this->_type = ResourceType::FONT;
+}
+
+void Texture::loadAudioFromFile(SDL_Renderer *renderer, std::string path) {
+	warn("WIP");
+	this->_content = path;
+	this->_type = ResourceType::SOUND;
 }
 
 void Texture::free() {
