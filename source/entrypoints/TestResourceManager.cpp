@@ -91,7 +91,8 @@ int main() {
 	Texture* currTexture = nullptr;
 
 	for(const auto& resourcePath : gResourcePaths) {
-		ResourceManager::loadResource(resourcePath);
+		error("WIP");
+		// ResourceManager::loadResource(resourcePath, resourcePath);
 	}
 
 	bool quit = false;
