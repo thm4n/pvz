@@ -2,14 +2,18 @@
 
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #include <iostream>
+#include <exception>
 #include <string>
 #include <filesystem>
 
 namespace fs = std::filesystem;
 
 #include "Logger.hpp"
+#include "ResourceType.hpp"
 
 class Texture {
 public:
@@ -20,7 +24,9 @@ public:
     ~Texture();
 
     // Loads image at specified path
-    void loadFromFile(SDL_Renderer *renderer, std::string path);
+    void loadImageFromFile(SDL_Renderer *renderer, std::string path);
+    void loadTextFromFont(SDL_Renderer *renderer, std::string text, TTF_Font* ttf, SDL_Color color);
+    void loadAudioFromFile(SDL_Renderer *renderer, std::string path);
 
     // Deallocates texture
     void free();
@@ -43,8 +49,9 @@ public:
 
 private:
     // The actual hardware texture
-	fs::path _path;
+	fs::path _content;
     SDL_Texture *_texture;
+	ResourceType _type;
 
     // Image dimensions
     int _width;
