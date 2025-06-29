@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 #include <cstdlib>
 #include <ctime>
 
@@ -17,12 +18,13 @@ int main() {
 	graphics->initSDL();
 	graphics->initGraphics();
 	game->setGraphics(graphics);
-
+	game->loadResources();
 	game->finishInitialization();
 
 	game->gameLoopMainMenu();
 
 	debug("cleaning up");
+	game->destroyResourceManager();
 	delete graphics;
 	delete game;
 
