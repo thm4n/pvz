@@ -21,7 +21,7 @@ OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 # Output binary name
 TARGET := pvz
 # List of tests
-TESTS := TestAnimationReader TestResourceManager
+TESTS := TestAnimationReader TestResourceManager TestResourceJson TestFont
 
 .PHONY: $(TARGET) $(TESTS)
 
@@ -57,3 +57,12 @@ TestResourceManager: $(OBJ)
 	$(CXX) ./source/entrypoints/TestResourceManager.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
 	@echo ""
 	
+TestResourceJson: $(OBJ)
+	@echo "compiling $@"
+	$(CXX) ./source/entrypoints/TestResourceJson.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+	@echo ""
+	
+TestFont: $(OBJ)
+	@echo "compiling $@"
+	$(CXX) ./source/entrypoints/TestFont.cpp $^ -o $@ $(CXXARGS) $(CXXLIBS)
+	@echo ""
