@@ -326,6 +326,78 @@
         "name": "LoadingImages",
         "Images": [
             {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_BG_CENTER",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_BG_Center.jpg"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_BG_LEFT",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_BG_Left.jpg"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_BG_RIGHT",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_BG_Right.jpg"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_ALMANAC_KEY_SHADOW",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_almanac_key_shadow.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_SHADOW_SURVIVAL",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Shadow_Survival.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_SHADOW_CHALLENGE",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Shadow_Challenge.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_SHADOW_ZENGARDEN",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Shadow_StartAdventure.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_SHADOW_STARTADVENTURE",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Shadow_StartAdventure.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_STARTADVENTURE_BUTTON1",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_StartAdventure_Button1.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAF1",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaf1.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAF2",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaf2.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAF3",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaf3.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAF4",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaf4.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAF5",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaf5.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_LEAVES",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Leaves.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_FLOWER1",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Flower1.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_FLOWER2",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Flower2.png"
+            },
+            {
+                "id": "IMAGE_REANIM_SELECTORSCREEN_FLOWER3",
+                "path": "resources/miscellaneous/Selectorscreen/SelectorScreen_Flower3.png"
+            },
+            {
                 "id": "IMAGE_EDITBOX",
                 "path": "resources/images/editbox.gif"
             },

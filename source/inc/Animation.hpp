@@ -4,9 +4,11 @@
 
 #include <filesystem>
 #include <iostream>
+#include <exception>
 #include <string>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 #include "ResourceManager.hpp"
 #include "Animation.hpp"
@@ -32,6 +34,10 @@ typedef struct {
     std::string name;
     std::vector<AnimationFrame> frames;  // List of frames in the track
     int frameCount;                      // Total number of frames in the track
+	int currentFrame;                    // Current frame index
+	bool paused;                         // Whether the track is paused
+	double fps;                          // Frames per second for the track
+	bool running;
 } AnimationTrack;
 
 Animation* readAnimation(const std::string& filePath);
@@ -50,7 +56,18 @@ public:
     std::vector<std::string> getRequiredResources() const;
     void loadRequiredResources() const;
 
-private:
+	void playTrack(std::string trackName);
+	void update();
+	void draw(SDL_Renderer* renderer) const;
+
+	std::string getName() const;
+	int getFrameCount() const;
+	float getDuration() const;
+	int getFPS() const;
+	int getCurrentFrame() const;
+	bool isShown() const;
+
+	private:
     int _fps;
     std::vector<AnimationReader::AnimationTrack>
         _tracks;        // List of animation tracks

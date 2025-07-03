@@ -17,6 +17,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+	for(const auto& track : animation->getTracks()) {
+		std::cout << " >> " << track.name << std::endl;
+	}
+
     auto reqs = animation->getRequiredResources();
     std::cout << "Required resource: " << std::endl;
     for(const auto& req : reqs) {

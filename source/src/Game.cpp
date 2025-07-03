@@ -52,12 +52,28 @@ void Game::handleEvent(SDL_Event& e) {
     }
 }
 
-void Game::update() {
+void Game::registerAnimation(Animation* animation) {
+	if (animation) {
+		debug("Registering animation: %s", animation->getName().c_str());
+		this->_animations.push_back(animation);
+	}
+}
 
+void Game::update() {
+	for(auto& animation : this->_animations) {
+		if (animation) {
+			animation->update();
+		}
+	}
 }
 
 void Game::draw() {
-    // must be called at end
+	for(auto& animation : this->_animations) {
+		if (animation) {
+			animation->draw(this->_graphics->getRenderer());
+		}
+	}
+
     this->_graphics->draw();
 }
 
@@ -106,13 +122,44 @@ void Game::gameLoopMainMenu() {
 	debug("Enetring Main Menu Loop");
 	this->_stateManager->setState(GameState::MainMenu);
 
-	fs::path selector_screen_reanim_file_path = "resources/reanims/SelectorScreen.reanim";
-	if (!fs::exists(selector_screen_reanim_file_path)) {
-		error("Selector screen reanim file does not exist: %s", selector_screen_reanim_file_path.string().c_str());
+	// fs::path selector_screen_reanim_file_path = "resources/reanims/SelectorScreen.reanim";
+	fs::path blover_reanim_file_path = "resources/reanims/Blover.reanim";
+	if (!fs::exists(blover_reanim_file_path)) {
+		error("Selector screen reanim file does not exist: %s", blover_reanim_file_path.string().c_str());
 		throw std::runtime_error("Selector screen reanim file does not exist");
 	}
 
-	Animation* selectorScreenAnimation = this->loadAnimation(selector_screen_reanim_file_path);
+	// Animation* animation = this->loadAnimation(selector_screen_reanim_file_path);
+	// animation->playTrack("SelectorScreen_BG");
+	// animation->playTrack("SelectorScreen_BG_Center");
+	// animation->playTrack("SelectorScreen_BG_Left");
+	// animation->playTrack("SelectorScreen_BG_Right");
+	// animation->playTrack("almanac_key_shadow");
+	// animation->playTrack("SelectorScreen_Survival_shadow");
+	// animation->playTrack("SelectorScreen_Survival_button");
+	// animation->playTrack("SelectorScreen_Challenges_shadow");
+	// animation->playTrack("SelectorScreen_Challenges_button");
+	// animation->playTrack("SelectorScreen_ZenGarden_shadow");
+	// animation->playTrack("SelectorScreen_ZenGarden_button");
+	// animation->playTrack("SelectorScreen_StartAdventure_shadow");
+	// animation->playTrack("SelectorScreen_StartAdventure_button");
+	// animation->playTrack("SelectorScreen_Adventure_shadow");
+	// animation->playTrack("SelectorScreen_Adventure_button");
+
+	Animation* animation = this->loadAnimation(blover_reanim_file_path);
+	animation->playTrack("anim_idle");
+	// animation->playTrack("anim_loop");
+	// animation->playTrack("anim_blow");
+	// animation->playTrack("Blover_dirt_back");
+	// animation->playTrack("Blover_stem2");
+	// animation->playTrack("Blover_stem1");
+	// animation->playTrack("Blover_dirt_front");
+	// animation->playTrack("Blover_petals");
+	// animation->playTrack("Blover_petals2");
+	// animation->playTrack("Blover_petals3");
+	// animation->playTrack("Blover_head");
+
+	this->registerAnimation(animation);
 
 	while(this->_stateManager->getState() == GameState::MainMenu) {
 		this->_graphics->frameStart();
@@ -134,7 +181,7 @@ void Game::gameLoopMainMenu() {
 	}
 
 	debug("Cleaning up animations");
-	delete selectorScreenAnimation;
+	delete animation;
 
 	debug("Exiting Main Menu Loop");
 }
@@ -190,12 +237,12 @@ void Game::loadResources() {
 	for(uint i = 0; i < resources.size(); i++) {
 		debug("Processing resource group: %s", resources[i]["name"].template get<std::string>().c_str());
 		auto& resourceGroup = resources[i]["Images"];
-		// for(uint j = 0; j < resourceGroup.size(); j++) {
-		// 	this->_resourceManager->loadImageResource(
-		// 		resourceGroup[j]["id"].template get<std::string>(),
-		// 		resourceGroup[j]["path"].template get<std::string>()
-		// 	);
-		// }
+		for(uint j = 0; j < resourceGroup.size(); j++) {
+			this->_resourceManager->loadImageResource(
+				resourceGroup[j]["id"].template get<std::string>(),
+				resourceGroup[j]["path"].template get<std::string>()
+			);
+		}
 
 		resourceGroup = resources[i]["Font"];
 		for(uint j = 0; j < resourceGroup.size(); j++) {

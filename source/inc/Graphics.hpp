@@ -20,6 +20,7 @@ public:
     void clearScreen();
     void draw();
 
+	SDL_Renderer* getRenderer() const;
     void setTargetFPS(int targetFPS);
     int getTargetFPS() const;
     int getFrameDuration() const;

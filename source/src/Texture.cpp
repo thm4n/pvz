@@ -32,6 +32,7 @@ void Texture::loadImageFromFile(SDL_Renderer* renderer, std::string path) {
 	// Get image dimensions
 	this->_width = loadedSurface->w;
 	this->_height = loadedSurface->h;
+	debug("%s created with dimensions: %d x %d", path.c_str(), this->_width, this->_height);
 
 
 	SDL_FreeSurface(loadedSurface);
@@ -105,6 +106,10 @@ void Texture::render(SDL_Renderer* renderer, int x, int y, SDL_Rect* clip) {
 
     // Render to screen
     SDL_RenderCopy(renderer, this->_texture, clip, &renderQuad);
+}
+
+SDL_Texture* Texture::getTexture() const {
+	return this->_texture;
 }
 
 int Texture::getWidth() const { return this->_width; }

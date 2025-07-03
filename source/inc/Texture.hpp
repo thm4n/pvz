@@ -43,6 +43,8 @@ public:
     // Renders texture at given point
     void render(SDL_Renderer *renderer, int x, int y, SDL_Rect *clip = nullptr);
 
+	SDL_Texture* getTexture() const;
+
     // Gets image dimensions
     int getWidth() const;
     int getHeight() const;

@@ -35,6 +35,7 @@ private:
 	Graphics* _graphics;
 	ResourceManager* _resourceManager;
 	StateManager* _stateManager;
+	std::vector<Animation*> _animations;
 
 public:
     Game();
@@ -43,6 +44,7 @@ public:
 	
     void handleEvent(SDL_Event& e);
 
+	void registerAnimation(Animation* animation);
     void update();
     void draw();
     void exit();

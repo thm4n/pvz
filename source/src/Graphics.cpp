@@ -1,7 +1,7 @@
 #include "inc/Graphics.hpp"
 
 Graphics::Graphics() {
-    this->_targetFPS = 60;
+    this->_targetFPS = 12;
     this->_frameDuration = 1000.0 / (double)this->_targetFPS;
 
     this->_window = nullptr;
@@ -117,6 +117,10 @@ void Graphics::clearScreen() {
 
 void Graphics::draw() {
     SDL_RenderPresent(this->_renderer);
+}
+
+SDL_Renderer* Graphics::getRenderer() const {
+	return this->_renderer;
 }
 
 void Graphics::setTargetFPS(int targetFPS) {

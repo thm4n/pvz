@@ -27,7 +27,7 @@ Animation* readAnimation(const std::string& filePath) {  // entry point
         return nullptr;
     }
 
-    debug("Animation file loaded successfully: %s", filePath.c_str());
+    // debug("Animation file loaded successfully: %s", filePath.c_str());
 
     element = doc.FirstChildElement("fps");
     if (!element) {
@@ -38,16 +38,15 @@ Animation* readAnimation(const std::string& filePath) {  // entry point
     debug("FPS: %d", fps);
 
     while((element = element->NextSiblingElement("track"))) {
-        debug("Found track element: %s", element->Name());
-        track = {std::string(""), std::vector<AnimationFrame>({}), 0};
+        // debug("Found track element: %s", element->Name());
+        track = {std::string(""), std::vector<AnimationFrame>({}), 0, 0, false, (double)fps, false};
         parseTrack(element, track);
         if (track.frameCount == 0) {
             error("Track %s has no frames, skipping", track.name.c_str());
             throw std::runtime_error("Track has no frames");
         }
         tracks.push_back(track);
-        debug("added to animation '%s' track '%s'", animationName.c_str(),
-              track.name.c_str(), track.frameCount);
+        // debug("added to animation '%s' track '%s'", animationName.c_str(), track.name.c_str(), track.frameCount);
     }
 
     animation = new Animation(fps, animationName);
@@ -62,12 +61,10 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
                                    0.0, 0.0, 1.0, true, std::string("")};
     xml::XMLElement* element = nullptr;
 
-    debug("Entering parseTrack function");
     element = trackElement->FirstChildElement("name");
     track.name = element->GetText();
     debug("Parsing track: %s", track.name.c_str());
 
-    debug("starting to parse frames");
     element = trackElement->FirstChildElement("t");
     if (!element) {
         error("No <t> elements found in track: %s", track.name.c_str());
@@ -76,16 +73,15 @@ void parseTrack(xml::XMLElement* trackElement, AnimationTrack& track) {
 
     while (element) {
         parseTrackFrame(element, currentFrame);
-        printFrame(currentFrame);
+        // printFrame(currentFrame);
 
         currentFrame.frameIndex = track.frameCount;
-        debug("Parsed frame index: %d", currentFrame.frameIndex);
+        // debug("Parsed frame index: %d", currentFrame.frameIndex);
         track.frames.push_back(currentFrame);
         track.frameCount++;
-        debug("going to next frame element: %d", track.frameCount);
+        // debug("going to next frame element: %d", track.frameCount);
         element = element->NextSiblingElement("t");
     }
-    debug("Finished parsing frames, total frames: %d", track.frameCount);
 }
 
 void parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame) {
@@ -93,41 +89,41 @@ void parseTrackFrame(xml::XMLElement* frameElement, AnimationFrame& frame) {
 
     currElement = frameElement->FirstChildElement();
     while (currElement) {
-        debug("Parsing frame element: %s", currElement->Name());
+        // debug("Parsing frame element: %s", currElement->Name());
 
         if (currElement->Name() == std::string("f")) {
-            debug("Found <f> element: %s", currElement->Name());
+            // debug("Found <f> element: %s", currElement->Name());
             if (currElement->IntText() == -1) {
-                debug("<f> element indicates frame is hidden");
+                // debug("<f> element indicates frame is hidden");
                 frame.shown = false;
             } else {
-                debug("<f> element indicates frame is shown");
+                // debug("<f> element indicates frame is shown");
                 frame.shown = true;
             }
         } else if (currElement->Name() == std::string("x")) {
             frame.x = currElement->DoubleText();
-            debug("Parsed x: %f", frame.x);
+            // debug("Parsed x: %f", frame.x);
         } else if (currElement->Name() == std::string("y")) {
             frame.y = currElement->DoubleText();
-            debug("Parsed y: %f", frame.y);
+            // debug("Parsed y: %f", frame.y);
         } else if (currElement->Name() == std::string("sx")) {
             frame.sx = currElement->DoubleText();
-            debug("Parsed sx: %f", frame.sx);
+            // debug("Parsed sx: %f", frame.sx);
         } else if (currElement->Name() == std::string("sy")) {
             frame.sy = currElement->DoubleText();
-            debug("Parsed sy: %f", frame.sy);
+            // debug("Parsed sy: %f", frame.sy);
         } else if (currElement->Name() == std::string("kx")) {
             frame.kx = currElement->DoubleText();
-            debug("Parsed kx: %f", frame.kx);
+            // debug("Parsed kx: %f", frame.kx);
         } else if (currElement->Name() == std::string("ky")) {
             frame.ky = currElement->DoubleText();
-            debug("Parsed ky: %f", frame.ky);
+            // debug("Parsed ky: %f", frame.ky);
         } else if (currElement->Name() == std::string("a")) {
             frame.opacity = currElement->DoubleText();
-            debug("Parsed opacity: %f", frame.opacity);
+            // debug("Parsed opacity: %f", frame.opacity);
         } else if (currElement->Name() == std::string("i")) {
             frame.image = std::string(currElement->GetText());
-            debug("Parsed image: %s", frame.image.c_str());
+            // debug("Parsed image: %s", frame.image.c_str());
         } else {
             error("Unknown element in frame: %s", currElement->Name());
         }
